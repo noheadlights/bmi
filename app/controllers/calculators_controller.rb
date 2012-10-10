@@ -9,6 +9,7 @@ class CalculatorsController < ApplicationController
   # GET /calculators/1.json
   def show
     @calculator = Calculator.find(params[:id])
+    @stats= statistics
 
   end
 
@@ -30,7 +31,7 @@ class CalculatorsController < ApplicationController
     @calculator = Calculator.new(params[:calculator])
 
     if @calculator.save
-      redirect_to @calculator, notice: 'Calculator was successfully created.'
+      redirect_to @calculator, notice: 'Calculations were successfully performed.'
     else
       render action: "new"
     end
@@ -56,4 +57,24 @@ class CalculatorsController < ApplicationController
 
     redirect_to calculators_url
   end
+
+  def statistics
+    stats={}
+    calculators=Calculator.all
+    sum=0
+    are_heavier=0
+    are_lighter=0
+    calculators.each do |c|
+      sum += c.bmi
+      are_heavier +=1 if c.bmi>@calculator.bmi
+      are_lighter +=1 if c.bmi<@calculator.bmi
+    end
+    if calculators.count
+      stats[:average] =  sum / calculators.count
+      stats[:percent_are_heavier] =  calculators.count / 100 * are_heavier
+      stats[:percent_are_lighter] =  calculators.count / 100 * are_lighter
+    end
+    return stats
+  end
+
 end

@@ -11,15 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121010123425) do
+ActiveRecord::Schema.define(:version => 20121010145201) do
 
   create_table "calculators", :force => true do |t|
     t.string   "name"
     t.integer  "age"
     t.float    "weight"
-    t.float    "size"
+    t.float    "height"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "gender"
   end
 
 end

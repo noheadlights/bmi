@@ -11,7 +11,7 @@ gem 'rspec-rails'
 gem 'cucumber-rails'
 gem 'capybara'
 gem 'database_cleaner'
-
+gem 'simple_form'
 gem 'twitter-bootstrap-rails', :git => "git://github.com/seyhunak/twitter-bootstrap-rails.git", :branch => "static"
 
 # Gems used only for assets and not required
