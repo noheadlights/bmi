@@ -1,25 +1,25 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = @calculator.class -%>
+<h1><%=t '.title', :default => model_class.model_name.human %></h1>
 
-<p>
-  <b>Name:</b>
-  <%= @calculator.name %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @calculator.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:age) %>:</strong></dt>
+  <dd><%= @calculator.age %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:weight) %>:</strong></dt>
+  <dd><%= @calculator.weight %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:size) %>:</strong></dt>
+  <dd><%= @calculator.size %></dd>
+</dl>
 
-<p>
-  <b>Age:</b>
-  <%= @calculator.age %>
-</p>
-
-<p>
-  <b>Weight:</b>
-  <%= @calculator.weight %>
-</p>
-
-<p>
-  <b>Size:</b>
-  <%= @calculator.size %>
-</p>
-
-
-<%= link_to 'Edit', edit_calculator_path(@calculator) %> |
-<%= link_to 'Back', calculators_path %>
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              calculators_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_calculator_path(@calculator), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              calculator_path(@calculator),
+              :method => 'delete',
+              :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+              :class => 'btn btn-danger' %>
+</div>

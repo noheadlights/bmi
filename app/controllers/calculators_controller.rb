@@ -3,11 +3,6 @@ class CalculatorsController < ApplicationController
   # GET /calculators.json
   def index
     @calculators = Calculator.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @calculators }
-    end
   end
 
   # GET /calculators/1
@@ -15,10 +10,6 @@ class CalculatorsController < ApplicationController
   def show
     @calculator = Calculator.find(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @calculator }
-    end
   end
 
   # GET /calculators/new
@@ -26,10 +17,6 @@ class CalculatorsController < ApplicationController
   def new
     @calculator = Calculator.new
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @calculator }
-    end
   end
 
   # GET /calculators/1/edit
@@ -42,14 +29,10 @@ class CalculatorsController < ApplicationController
   def create
     @calculator = Calculator.new(params[:calculator])
 
-    respond_to do |format|
-      if @calculator.save
-        format.html { redirect_to @calculator, notice: 'Calculator was successfully created.' }
-        format.json { render json: @calculator, status: :created, location: @calculator }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @calculator.errors, status: :unprocessable_entity }
-      end
+    if @calculator.save
+      redirect_to @calculator, notice: 'Calculator was successfully created.'
+    else
+      render action: "new"
     end
   end
 
@@ -58,14 +41,10 @@ class CalculatorsController < ApplicationController
   def update
     @calculator = Calculator.find(params[:id])
 
-    respond_to do |format|
-      if @calculator.update_attributes(params[:calculator])
-        format.html { redirect_to @calculator, notice: 'Calculator was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @calculator.errors, status: :unprocessable_entity }
-      end
+    if @calculator.update_attributes(params[:calculator])
+      redirect_to @calculator, notice: 'Calculator was successfully updated.'
+    else
+      render action: "edit"
     end
   end
 
@@ -75,9 +54,6 @@ class CalculatorsController < ApplicationController
     @calculator = Calculator.find(params[:id])
     @calculator.destroy
 
-    respond_to do |format|
-      format.html { redirect_to calculators_url }
-      format.json { head :no_content }
-    end
+    redirect_to calculators_url
   end
 end

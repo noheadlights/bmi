@@ -1,29 +1,40 @@
-<h1>Listing calculators</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Age</th>
-    <th>Weight</th>
-    <th>Size</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @calculators.each do |calculator| %>
-  <tr>
-    <td><%= calculator.name %></td>
-    <td><%= calculator.age %></td>
-    <td><%= calculator.weight %></td>
-    <td><%= calculator.size %></td>
-    <td><%= link_to 'Show', calculator %></td>
-    <td><%= link_to 'Edit', edit_calculator_path(calculator) %></td>
-    <td><%= link_to 'Destroy', calculator, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+<%- model_class = Calculator.new.class -%>
+<h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:age) %></th>
+      <th><%= model_class.human_attribute_name(:weight) %></th>
+      <th><%= model_class.human_attribute_name(:size) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @calculators.each do |calculator| %>
+      <tr>
+        <td><%= link_to calculator.id, calculator_path(calculator) %></td>
+        <td><%= calculator.name %></td>
+        <td><%= calculator.age %></td>
+        <td><%= calculator.weight %></td>
+        <td><%= calculator.size %></td>
+        <td><%=l calculator.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_calculator_path(calculator), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      calculator_path(calculator),
+                      :method => :delete,
+                      :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<br />
-
-<%= link_to 'New Calculator', new_calculator_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_calculator_path,
+            :class => 'btn btn-primary' %>
