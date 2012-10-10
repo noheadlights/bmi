@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @calculator.name %>
+</p>
+
+<p>
+  <b>Age:</b>
+  <%= @calculator.age %>
+</p>
+
+<p>
+  <b>Weight:</b>
+  <%= @calculator.weight %>
+</p>
+
+<p>
+  <b>Size:</b>
+  <%= @calculator.size %>
+</p>
+
+
+<%= link_to 'Edit', edit_calculator_path(@calculator) %> |
+<%= link_to 'Back', calculators_path %>

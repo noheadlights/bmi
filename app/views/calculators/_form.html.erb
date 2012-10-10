@@ -1,0 +1,33 @@
+<%= form_for(@calculator) do |f| %>
+  <% if @calculator.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@calculator.errors.count, "error") %> prohibited this calculator from being saved:</h2>
+
+      <ul>
+      <% @calculator.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :age %><br />
+    <%= f.number_field :age %>
+  </div>
+  <div class="field">
+    <%= f.label :weight %><br />
+    <%= f.text_field :weight %>
+  </div>
+  <div class="field">
+    <%= f.label :size %><br />
+    <%= f.text_field :size %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
